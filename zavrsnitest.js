@@ -43,6 +43,10 @@ describe('Login Tests', function () {
 
     it('Kupovina proizvoda', async function () {
         await loginPage.login('standard_user', 'secret_sauce');
+
+        const pageTitle = await driver.getTitle();
+        expect(pageTitle).to.include('Swag Labs');
+
         await productsPage.addToCart(0);
         await productsPage.addToCart(1);
         const cartBadge = await productsPage.getCartBadgeText();
@@ -54,6 +58,7 @@ describe('Login Tests', function () {
 
         await productsPage.fillCheckoutForm('Masa', 'Cengic', '71000');
         await productsPage.submitCheckout();
+        
         //const title = await driver.getTitle();
         //expect(title).to.include('Overview');
         await productsPage.finishCheckout();
@@ -61,8 +66,15 @@ describe('Login Tests', function () {
         const finishMessage = await driver.findElement(By.className('complete-header')).getText();
         expect(finishMessage).to.equal('Thank you for your order!');
 
-       // await productsPage.finishburgerButton();
-        //await productsPage.finishlogoutButton();
+       //await productsPage.finishBurger();
+       //await productsPage.finishLogout();
+
+        //await driver.findElement(By.id('react-burger-menu-btn')).click();
+        //await driver.findElement(By.id('logout_sidebar_link')).click();
+    
+        // 15. Verify we are back on the login page
+        //const loginPageTitle = await driver.getTitle();
+       // expect(loginPageTitle).to.include('Swag Labs');
     
         
     });

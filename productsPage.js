@@ -51,13 +51,15 @@ class ProductsPage {
         
     }
 
-    async finishburgerButton() {
+    async finishBurger() {
         await this.driver.findElement(this.burgerButton).click();
-    }
-    async finishlogoutBotton() {
-        await this.driver.findElement(this.logoutButton).click();
-    }
+        
+    } 
     
+    async finishLogout() {
+        await this.driver.findElement(this.logoutButton).click();
+        
+    } 
 }
 
 module.exports = ProductsPage;

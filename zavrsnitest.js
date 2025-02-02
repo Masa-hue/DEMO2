@@ -8,7 +8,7 @@ describe('Login Tests', function () {
     //let driver;
     let loginPage;
     let productsPage;
-    let cartPage;
+    //let cartPage;
     this.timeout(50000);
 
     beforeEach(async function () {
@@ -48,8 +48,22 @@ describe('Login Tests', function () {
         const cartBadge = await productsPage.getCartBadgeText();
         expect(cartBadge).to.equal('2');
         
+     
         await productsPage.goToCart();
         await productsPage.checkout();
+
+        await productsPage.fillCheckoutForm('Masa', 'Cengic', '71000');
+        await productsPage.submitCheckout();
+        //const title = await driver.getTitle();
+        //expect(title).to.include('Overview');
+        await productsPage.finishCheckout();
+
+        const finishMessage = await driver.findElement(By.className('complete-header')).getText();
+        expect(finishMessage).to.equal('Thank you for your order!');
+
+       // await productsPage.finishburgerButton();
+        //await productsPage.finishlogoutButton();
+    
         
     });
 
